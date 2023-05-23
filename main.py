@@ -33,28 +33,26 @@ while game_is_on:
         food.refresh()
         snake.eat_food()
         scoreboard.increase_score()
-        # if TIME_INCREMENT > 0.3:
-        #     TIME_INCREMENT -= .05
-        # elif 0.3 >= TIME_INCREMENT >= 0.025:
-        #     TIME_INCREMENT -= .025
-        # elif TIME_INCREMENT == 0:
-        #     game_is_on = False
-        #     scoreboard.won()
 
 
 # end the game if you go outside the map
     if snake.head.xcor() * snake.head.xcor() > 90000:
-        game_is_on = False
-        scoreboard.game_over()
+        scoreboard.reset_scoreboard()
+        time.sleep(2)
+        print(f"score {scoreboard.score}, high score {scoreboard.high_score}")
+        snake.reset_snake()
     if snake.head.ycor() * snake.head.ycor() > 90000:
-        game_is_on = False
-        scoreboard.game_over()
+        scoreboard.reset_scoreboard()
+        time.sleep(2)
+        print(f"score {scoreboard.score}, high score {scoreboard.high_score}")
+        snake.reset_snake()
 
 # detect collision with tail
     for segment in snake.segments[1:]:
         if snake.head.distance(segment) < 5:
-            game_is_on = False
-            scoreboard.game_over()
-
+            scoreboard.reset_scoreboard()
+            print(f"score {scoreboard.score}, high score {scoreboard.high_score}")
+            time.sleep(2)
+            snake.reset_snake()
 
 screen.exitonclick()
